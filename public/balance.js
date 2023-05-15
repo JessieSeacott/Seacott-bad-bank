@@ -2,16 +2,17 @@ function Balance(){
   const [show, setShow]     = React.useState(true);
   const [status, setStatus] = React.useState('');  
 
-  return (
+  return (<>
     <Card
-      bgcolor="info"
+      bgcolor="light"
+      txtcolor="black"
       header="Balance"
       status={status}
       body={show ?
         <BalanceForm setShow={setShow} setStatus={setStatus}/> :
         <BalanceMsg setShow={setShow} setStatus={setStatus}/>}
     />
-  )
+  </>)
 
 }
 
@@ -19,7 +20,7 @@ function BalanceMsg(props){
   return(<>
     <h5>Success</h5>
     <button type="submit" 
-      className="btn btn-light" 
+      className="btn btn-info" 
       onClick={() => {
         props.setShow(true);
         props.setStatus('');
@@ -60,7 +61,7 @@ function BalanceForm(props){
       onChange={e => setEmail(e.currentTarget.value)}/><br/>
 
     <button type="submit" 
-      className="btn btn-light" 
+      className="btn btn-info" 
       onClick={handle}>
         Check Balance
     </button>

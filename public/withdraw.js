@@ -2,23 +2,24 @@ function Withdraw(){
   const [show, setShow]     = React.useState(true);
   const [status, setStatus] = React.useState('');  
 
-  return (
+  return (<>
     <Card
-      bgcolor="success"
+      bgcolor="light"
+      txtcolor="black"
       header="Withdraw"
       status={status}
       body={show ? 
         <WithdrawForm setShow={setShow} setStatus={setStatus}/> :
         <WithdrawMsg setShow={setShow} setStatus={setStatus}/>}
     />
-  )
+  </>)
 }
 
 function WithdrawMsg(props){
   return(<>
     <h5>Success</h5>
     <button type="submit" 
-      className="btn btn-light" 
+      className="btn btn-info" 
       onClick={() => {
         props.setShow(true);
         props.setStatus('');
@@ -66,7 +67,7 @@ function WithdrawForm(props){
       onChange={e => setAmount(e.currentTarget.value)}/><br/>
 
     <button type="submit" 
-      className="btn btn-light" 
+      className="btn btn-info" 
       onClick={handle}>
         Withdraw
     </button>

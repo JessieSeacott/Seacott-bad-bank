@@ -1,53 +1,49 @@
 function Login(){
   const [show, setShow]     = React.useState(true);
-  const [status, setStatus] = React.useState('');    
-  const [welcome, setWelcome] = React.useState('');
+  const [status, setStatus] = React.useState('');
 
-  return (
+  return (<>
     <Card
-      bgcolor="secondary"
+      bgcolor="light"
+      txtcolor="black"
       header="Login"
       status={status}
       body={show ? 
         <LoginForm setShow={setShow} setStatus={setStatus}/> :
         <LoginMsg setShow={setShow} setStatus={setStatus}/>}
     />
-  ) 
+  </>) 
 }
-
-function LoginMsg(props){
-  setWelcome('Welcome Member!');
+ 
+function LoginMsg({setShow}){
   return(<>
     <h5>Success</h5>
     <button type="submit" 
-      className="btn btn-light" 
-      onClick={() => props.setShow(true)}>
-        Authenticate again
-    </button>
+      className="btn btn-info" 
+      onClick={() => setShow(true)}>Logout</button>
   </>);
 }
 
-function LoginForm(props){
+function LoginForm({setStatus, setShow}){
   const [email, setEmail]       = React.useState('');
   const [password, setPassword] = React.useState('');
 
-  function handle(){
+  function handle({setAccount}){
     fetch(`/account/login/${email}/${password}`)
     .then(response => response.text())
     .then(text => {
         try {
             const data = JSON.parse(text);
-            props.setStatus('');
-            props.setShow(false);
+            setStatus('');
+            setShow(false);
             console.log('JSON:', data);
         } catch(err) {
-            props.setStatus(text)
+            setStatus(text)
             console.log('err:', text);
         }
     });
   }
-
-
+  
   return (<>
 
     Email<br/>
@@ -64,7 +60,7 @@ function LoginForm(props){
       value={password} 
       onChange={e => setPassword(e.currentTarget.value)}/><br/>
 
-    <button type="submit" className="btn btn-light" onClick={handle}>Login</button>
+    <button type="submit" className="btn btn-info" onClick={handle}>Login</button>
    
   </>);
 }
